@@ -9,6 +9,7 @@ import (
 	"github.com/guilhermecostam/sys-finance/util"
 )
 
+// GetTransactions is a method to get all transactions in the system
 func GetTransactions(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -29,6 +30,7 @@ func GetTransactions(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewEncoder(w).Encode(transactions)
 }
 
+// CreateTransactions is a method to create a transactions in the system
 func CreateTransactions(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		w.WriteHeader(http.StatusMethodNotAllowed)
