@@ -1,9 +1,13 @@
-package util
+package test
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/guilhermecostam/sys-finance/util"
+)
 
 func TestStringToTime(t *testing.T) {
-	var convertedTime = StringToTime("2010-10-10T10:10:10")
+	var convertedTime = util.StringToTime("2010-10-10T10:10:10")
 
 	if convertedTime.Year() != 2010 {
 		t.Errorf("Expect the year to be 2010")
