@@ -6,11 +6,11 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/guilhermecostam/sys-finance/model/transaction"
+	"github.com/guilhermecostam/sys-finance/models"
 )
 
 // transactions is a instance of transaction model
-var transactions = transaction.Transactions{}
+var transactions = models.Transactions{}
 
 // GetTransactions is a method to get all transactions in the system
 func GetTransactions(responseWriter http.ResponseWriter, request *http.Request) {
