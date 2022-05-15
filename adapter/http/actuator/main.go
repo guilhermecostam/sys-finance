@@ -5,21 +5,26 @@ import (
 	"net/http"
 )
 
-// HealthBody is a struct for the health type return
-type HealthBody struct {
-	Status string `json:"status"`
-}
-
 // Health is a method to indicate server is alive or not
-func Health(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
-		w.WriteHeader(http.StatusMethodNotAllowed)
+func Health(responseWriter http.ResponseWriter, request *http.Request) {
+	responseWriter.Header().Set("content-type", "application/json")
+
+	profile := HealthBody{"alive"}
+
+	returnBody, err := json.Marshal(profile)
+	if err != nil {
+		http.Error(responseWriter, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	w.Header().Set("content-type", "application/json")
+	_, err = responseWriter.Write(returnBody)
+	if err != nil {
+		http.Error(responseWriter, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
 
-	var status = HealthBody{"alive"}
-
-	_ = json.NewEncoder(w).Encode(status)
+// HealthBody is a struct for the health type return
+type HealthBody struct {
+	Status string `json:"status"`
 }

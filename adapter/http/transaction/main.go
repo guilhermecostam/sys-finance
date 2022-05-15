@@ -2,43 +2,37 @@ package transaction
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 
 	"github.com/guilhermecostam/sys-finance/model/transaction"
-	"github.com/guilhermecostam/sys-finance/util"
 )
 
+// transactions is a instance of transaction model
+var transactions = transaction.Transactions{}
+
 // GetTransactions is a method to get all transactions in the system
-func GetTransactions(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
-		w.WriteHeader(http.StatusMethodNotAllowed)
+func GetTransactions(responseWriter http.ResponseWriter, request *http.Request) {
+	if request.Method != "GET" {
+		responseWriter.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
 
-	w.Header().Set("content-type", "application/json")
+	responseWriter.Header().Set("Content-type", "application/json")
 
-	var transactions = transaction.Transactions{
-		transaction.Transaction{
-			Title:     "Salary",
-			Amount:    1200.0,
-			Type:      0,
-			CreatedAt: util.StringToTime("2022-05-12T15:33:00"),
-		},
-	}
-
-	_ = json.NewEncoder(w).Encode(transactions)
+	_ = json.NewEncoder(responseWriter).Encode(transactions)
 }
 
 // CreateTransactions is a method to create a transactions in the system
-func CreateTransactions(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
-		w.WriteHeader(http.StatusMethodNotAllowed)
+func CreateTransactions(responseWriter http.ResponseWriter, request *http.Request) {
+	if request.Method != "POST" {
+		responseWriter.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
 
-	var res = transaction.Transactions{}
-	var body, _ = ioutil.ReadAll(r.Body)
+	var body, _ = ioutil.ReadAll(request.Body)
+	_ = json.Unmarshal(body, &transactions)
 
-	_ = json.Unmarshal(body, &res)
+	fmt.Println(transactions)
 }
