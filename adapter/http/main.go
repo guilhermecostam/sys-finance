@@ -1,6 +1,7 @@
 package http
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/guilhermecostam/sys-finance/adapter/http/actuator"
@@ -13,5 +14,5 @@ func Init() {
 	http.HandleFunc("/transactions/create", transaction.CreateTransactions)
 	http.HandleFunc("/health", actuator.Health)
 
-	http.ListenAndServe(":8000", nil)
+	log.Fatal(http.ListenAndServe(":8000", nil))
 }
