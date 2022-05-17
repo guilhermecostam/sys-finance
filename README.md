@@ -5,6 +5,12 @@ sys-finance
 
 <p align="center">Simple API for transaction maintenance. Developed to study the GO language.</p>
 
+<p align="center">
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License MIT">
+  </a>
+</p>
+
 <hr />
 
 ## Features
@@ -35,7 +41,7 @@ $ cd database/migrations && goose up
 $ cd .. && cd cmd && go run .
 ```
 
-## Acces to the API
+## Access to the API
 All requests to the API begin with:
 
 ```shell
