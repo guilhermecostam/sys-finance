@@ -42,17 +42,17 @@ All requests to the API begin with:
 localhost:8080/transactions
 ```
 
-For receive all results of transactions, just send this endpoint with the GET method.
-For create a transaction, just send this endpoint with the POST method and the required requests.
+- For receive all results of transactions, just send this endpoint with the **GET** method.
+- For create a transaction, just send this endpoint with the **POST** method and the required requests.
 
 Now, for calls using a specific transaction, it is necessary to send an ID in the scope of the endpoint:
 ```shell
 localhost:8080/transactions/{$transactionId}
 ```
 
-For receive a especific transaction, just send this endpoint with the GET method.
-For update a especific transaction, just send this endpoint with the PUT method.
-For delete a especific transaction, just send this endpoint with the DELETE method.
+- For receive a especific transaction, just send this endpoint with the **GET** method.
+- For update a especific transaction, just send this endpoint with the **PUT** method.
+- For delete a especific transaction, just send this endpoint with the **DELETE** method.
 
 ## How to contribute
 Do you want to contribute to the project? Just follow these instructions:
