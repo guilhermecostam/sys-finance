@@ -15,6 +15,7 @@ import (
 	"github.com/guilhermecostam/sys-finance/handler"
 )
 
+// main is a method for init all services for application
 func main() {
 	addr := ":8080"
 	listener, err := net.Listen("tcp", addr)
@@ -48,6 +49,7 @@ func main() {
 	log.Println("Stopping API server.")
 }
 
+// stop is a method for stop the application
 func Stop(server *http.Server) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()

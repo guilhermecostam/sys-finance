@@ -18,6 +18,7 @@ type TransactionList struct {
 	Transactions []Transaction `json:"transactions"`
 }
 
+// Bind is a method to validate required fields as requested
 func (t *Transaction) Bind(r *http.Request) error {
 	if t.Title == "" {
 		return fmt.Errorf("name is a required field")
@@ -26,10 +27,12 @@ func (t *Transaction) Bind(r *http.Request) error {
 	return nil
 }
 
+// Bind is a method to render TransactionList
 func (*TransactionList) Render(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
+// Bind is a method to render Transaction
 func (*Transaction) Render(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }

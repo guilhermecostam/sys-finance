@@ -12,8 +12,10 @@ import (
 	"github.com/guilhermecostam/sys-finance/models"
 )
 
+// transactionIDKey is a var for create a string for transactionID
 var transactionIDKey = "transactionID"
 
+// transactions is a method that initialize all endpoints for transactions
 func transactions(router chi.Router) {
 	router.Get("/", getAllTransactions)
 	router.Post("/", createTransaction)
@@ -25,6 +27,7 @@ func transactions(router chi.Router) {
 	})
 }
 
+// TransactionContext is a method for create a context to transaction endpoints
 func TransactionContext(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		transactionId := chi.URLParam(r, "transactionId")
@@ -43,6 +46,7 @@ func TransactionContext(next http.Handler) http.Handler {
 	})
 }
 
+// createTransaction is a endpoints function for create transaction
 func createTransaction(w http.ResponseWriter, r *http.Request) {
 	transaction := &models.Transaction{}
 
@@ -62,6 +66,7 @@ func createTransaction(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// getAllTransactions is a endpoints function for get all transaction
 func getAllTransactions(w http.ResponseWriter, r *http.Request) {
 	transactions, err := dbInstance.GetAllTransactions()
 	if err != nil {
@@ -74,6 +79,7 @@ func getAllTransactions(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// getTransaction is a endpoints function for get transaction by id
 func getTransaction(w http.ResponseWriter, r *http.Request) {
 	transactionID := r.Context().Value(transactionIDKey).(int)
 
@@ -93,6 +99,7 @@ func getTransaction(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// deleteTransaction is a endpoints function for delete transaction
 func deleteTransaction(w http.ResponseWriter, r *http.Request) {
 	transactionId := r.Context().Value(transactionIDKey).(int)
 
@@ -106,6 +113,8 @@ func deleteTransaction(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+// updateTransaction is a endpoints function for update transaction
 func updateTransaction(w http.ResponseWriter, r *http.Request) {
 	transactionId := r.Context().Value(transactionIDKey).(int)
 

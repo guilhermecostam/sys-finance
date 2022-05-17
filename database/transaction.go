@@ -7,6 +7,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
+// CreateTransaction is a method for create a transaction in database
 func (db Database) CreateTransaction(transaction *models.Transaction) error {
 	var id int
 	var createdAt string
@@ -23,6 +24,7 @@ func (db Database) CreateTransaction(transaction *models.Transaction) error {
 	return nil
 }
 
+// GetAllTransactions is a method for get all transactions in database
 func (db Database) GetAllTransactions() (*models.TransactionList, error) {
 	list := &models.TransactionList{}
 
@@ -43,6 +45,7 @@ func (db Database) GetAllTransactions() (*models.TransactionList, error) {
 	return list, nil
 }
 
+// GetTransactionById is a method for get one transaction by id
 func (db Database) GetTransactionById(transactionId int) (models.Transaction, error) {
 	transaction := models.Transaction{}
 
@@ -61,6 +64,7 @@ func (db Database) GetTransactionById(transactionId int) (models.Transaction, er
 	}
 }
 
+// DeleteTransaction is a method for delete a transaction in database
 func (db Database) DeleteTransaction(transactionId int) error {
 	query := `DELETE FROM transactions WHERE id = $1;`
 	_, err := db.Conn.Exec(query, transactionId)
@@ -73,6 +77,7 @@ func (db Database) DeleteTransaction(transactionId int) error {
 	}
 }
 
+// UpdateTransaction is a method for update a transaction in database
 func (db Database) UpdateTransaction(transactionId int, itemData models.Transaction) (models.Transaction, error) {
 	item := models.Transaction{}
 

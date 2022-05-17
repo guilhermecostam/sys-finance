@@ -16,10 +16,12 @@ const (
 // ErrNoMatch is returned when we request a row that doesn't exist
 var ErrNoMatch = fmt.Errorf("no matching record")
 
+// Database is a struct for database functions
 type Database struct {
 	Conn *sql.DB
 }
 
+// Initialize is a method for initialize the database connection
 func Initialize(username, password, database string) (Database, error) {
 	db := Database{}
 	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
